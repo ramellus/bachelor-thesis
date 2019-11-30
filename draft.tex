@@ -1,0 +1,65 @@
+\documentclass[a4paper,50 pt,titlepage,twoside,colorlinks=true,allcolors=circusroyale4]{book}
+\input{base.tex}
+\begin{document}
+\thispagestyle{empty}
+\centerline{\huge{\textsc{\MakeUppercase{Università degli Studi di Torino}}}}
+
+\vskip 27 pt
+
+\centerline {\huge{\textbf{Scuola di Scienze della Natura}}}
+
+\vskip 20 pt
+
+\centerline {\LARGE{Dipartimento di Matematica \textit{G. Peano}}}
+
+\vskip 20 pt
+
+\centerline {\huge{\textsc{corso di laurea in matematica}}}
+
+
+\vskip 60 pt
+
+
+\centerline {\includegraphics[width=7cm]{logo}}
+\vskip 1.2cm
+\centerline {\Large {Tesi di Laurea Triennale}} 
+
+\vskip 0.7cm
+
+\centerline {\huge {\bf THROUGH THE $\Lambda$ GLASS}}
+\centerline {\large {\it The topological path to Nonstandard Analysis}}
+
+\vskip 1cm
+
+\noindent \textbf{Relatore:} Prof. Alessandro Andretta
+\hfill  {\textbf{Candidato:} Simone Ramello }
+
+\vskip 2.5cm
+
+\centerline{2018/2019}
+\newpage
+\vspace*{\fill}
+\epigraph{  “Fairy tales are more than true: not because they tell us that dragons exist, but because they tell us that dragons can be beaten.”  }{Neil Gaiman}
+\vfill
+\tableofcontents
+\vspace*{\fill}
+\pagebreak
+\chapter*{Introduction}
+\epigraph{ “She was already learning that if you ignore the rules people will, half the time, quietly rewrite them so that they don't apply to you.”}{Terry Pratchett}
+	  \addcontentsline{toc}{chapter}{Introduction: fair is foul, and foul is fair}%
+	  
+There are a few moments, in a maths' student's career, more baffling and terrifying than the first meeting with a physics' course; those who are spared from this kind of encounter lose an interesting point of view, but are also exempted from the inevitable and painful process of adjusting to the way mathematics is done in these courses. Basic physics involves solving ODEs, and solving ODEs by separating variables amounts to simplifying differentials, something any student will initially abhor and then, slowly, come to terms with --- under the evergreen tacit agreement that 'such things have a formal counterpart'. This sentence is, to some extent, the tl;dr\footnote{\textbf{Urban Dictionary:} "Too long; didn't read.", meaning a post, article, or anything with words was too long, and whoever used the phrase didn't read it for that reason.} of this thesis. Non-Standard Analysis was born with the precise intent of making reasoning with infinitesimals precise, and sound, and at least a little less terrifyingly hand-wavey. Such a noble pursuit was, at least at the beginning of the story we are going to tell, explicitly internal to the mathematical logic community. Ever since the first steps in this direction, Non-Standard Analysis has spread in other areas of mathematics, proving itself to be an useful tool. A least expected application of Non-Standard Analysis will be the one approached in chapter three: Non-Archimedean Probability. Even though the use of Non-Standard Analysis in probability dates back to the first 'giants' of the field, the ideas behind the work of Wenmackers, Benci and Horsten in \cite{infprob} are quite new, and lead to the possibility of modelling infinite, fair lotteries. The first chapter will be devoted to showcasing some of the most basic and known approaches to Non-Standard Analysis, while the second chapter will mostly consist of material from \cite{NAM}, where a topological approach to Non-Standard Analysis is developed in an effort to provide a non-logical (and thus apparently more mathematician-friendly) approach to these methods.
+\par The titles of the thesis, of the chapters and of the sections all come from one or another opera of Carroll (mostly Alice's adventures). His works show to what extent creativity can go, how many worlds it can create and how many unexpected links will show up from entirely different such worlds. This kind of free creativity, of unbounded exploration of what can happen in universes that aren't our own is, I believe, precisely the core of mathematics and mathematical logic. I do not believe Cantor wanted us to stay in the paradise he has created; I believe he wanted us to build our own.
+\subsubsection*{A few words on notation}
+$\powerset{X}$ is the set of all subsets of $X$ (the \emph{power set of $X$}). $\finset{X}$ is the set of all \textit{finite} subsets of $X$. $\subseteq$ allows for the possibility of equality, $\subset$ does not. $\comp{X}$ is the complement of $X$ with respect to an ambient set; whenever the latter is not obvious we use $I \sm X$. We adhere to the religion whose gospel says that $0 \in \bb{N}$. In an ordered field of characteristic zero $(\ds{F}, \leq)$ an \emph{infinitesimal} is an element smaller than all fractions $\frac{1}{n}$, where $n$ is understood to be $\underbrace{1_{\ds{F}} + ... + 1_{\ds{F}}}_{n \ \mathrm{times}}$. Similarly, an \emph{infinite} element is an element bigger than any $n$. \par An ordered field with no infinitesimals is said to be \emph{Archimedean}.
+\chapter{Ghosts of departed quantities}
+\subfile{1}
+\chapter{Alice in $\Lambda$-land}
+\subfile{2}
+\chapter{How probable is forever?}
+\subfile{3b}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	\medskip
+\printbibliography
+\end{document}

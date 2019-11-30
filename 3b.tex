@@ -1,0 +1,168 @@
+\documentclass[draft.tex]{subfiles}
+\begin{document}
+\epigraph{ “Suppose that a dart is thrown, using the unit interval as a target; then what is the probability of hitting a point? Clearly this probability cannot be a positive real number, yet to say that it is zero violates the intuitive feeling that, after all, there is some chance of hitting the point.”}{\textit{Nonstandard Measure Theory} --- Bernstein and Wattenberg}
+
+	Classical probability, i.e. probability \textit{à la Kolmogorov}, has proved to be a very fruitful mathematical field and nevertheless extremely useful in applications; its foundations are mathematically sound, and provide a framework for very interesting results. Unfortunately, the same can't be said for its \textit{philosophical} foundations: in the following, we will give a brief resume of classical probability and then show how a very simple model can't be built under Kolmogorov's axiomatization. We then argue that a possible way out of this is through the use of nonstandard methods, giving a possible axiomatization relying on $\Lambda$-theory.
+\section{Begin at the beginning}
+	We say that a \emph{probability space} is a triple $\langle \Omega, \Sigma, \prob\rangle$ where $\Omega$ is a set, $\Sigma$ is a $\sigma$-algebra on $\Omega$ and $\prob: \Sigma \to \RR$ is a real-valued set function that satisfies axioms \textsf{K1}, \textsf{K2}, \textsf{K3}.
+	\begin{itemize}
+		\item[\textsf{K1}.] for all $A \in \Sigma$, $ \prob(A) \geq 0$,
+		\item[\textsf{K2}.] $ \prob(\Omega) = 1$,
+		\item[\textsf{K3}.] for any $\langle A_i: i \in \NN\rangle \subseteq \Sigma$ such that for $i \neq j$, $A_i \cap A_j = \emptyset$, then
+			\begin{equation*}
+				\prob\left(\bigcup\limits_{i \in \NN} A_i\right) = \sum\limits_{i=0}^{+\infty} \prob(A_i).
+			\end{equation*}
+	\end{itemize}
+	Axiom $\textsf{K3}$ is called \emph{$\sigma$-additivity} and is equivalent to $\textsf{K3}^{-}$ (\emph{finite additivity}) + $\textsf{K}_{\infty}$ (\emph{continuity}):
+	\begin{itemize}
+		\item[$\textsf{K3}^{-}$.] for any $A, B \in \Sigma$ such that $A \cap B = \emptyset$, then $\prob(A\cup B) = \prob(A) + \prob(B)$,
+		\item[$\textsf{K}_{\infty}$.] let $\langle A_n: n \in \NN\rangle \subseteq \Sigma$ be an increasing sequence of sets, i.e. for all $n$ we have $A_{n} \subseteq A_{n+1}$, then limits commute with $\prob$, that is
+			\begin{equation*}
+				\prob\left(\bigcup\limits_{n \in \NN}A_n\right) = \lim\limits_{n \to +\infty} \prob(A_n).
+			\end{equation*}
+	\end{itemize}
+	The proof of this equivalence can be found on any introductory probability book.
+	\subsection{A fair lottery on the naturals: a negative result} 
+	We now consider the natural numbers $\NN$ and imagine we want to model --- through the use of Kolmogorov's axioms --- a fair lottery, i.e. a game where very ticket $n \in \NN$ has the same probability $\prob(\{n\}) = \epsilon \in [0,1]$. By $\textsf{K3}$, since every singleton is disjoint from another one, we have that
+	\begin{equation*}
+		\prob\left(\bigcup_{n \in \NN} \{n\}\right) = \sum\limits_{n = 0}^{+\infty} \prob(\{n\}) = \sum\limits_{n = 0}^{+\infty} \epsilon,
+	\end{equation*}
+	while on the other hand by $\textsf{K2}$
+	\begin{equation*}
+		\prob\big(\bigcup_{n \in \NN}\{n\}\big) = \prob(\NN) = 1.
+	\end{equation*}
+	We have two possibilities: if $\epsilon = 0,$ then the above series converges to 0, which contradicts \textsf{K2}; on the other hand, if $\epsilon > 0$ then the series diverges, again against \textsf{K2}. The obstruction to this model comes from \textsf{K2} and \textsf{K3}, so in order to allow the possibility of such probabilistic scenarios --- in order to build a \emph{weakly Laplacian} theory of probability --- one of them has to go. Our choice falls on \textsf{K3}, with a caveat: not \textit{all} of \textsf{K3} has to go. We can keep $\textsf{K3}^{-}$, while simultaneously dropping the more controversial $\textsf{K}_{\infty}$. This will be the aim of NAP, \emph{Non-Archimedean Probability}.
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section{One can’t believe infinitesimal things}
+	A \emph{NAP space} is a triple $\langle \Omega, \cl{R}, \prob\rangle$ where $\Omega$ is the \emph{event space}, $\cl{R}$ is a superreal field, $\prob: \powerset{\Omega} \to \cl{R}$ is the \emph{probability function}. We recall a basic definition from classical probability: for every $A, B \subseteq \Omega$ such that $B \neq \emptyset$, the \emph{conditional probability} $\prob(A \ \vert \  B)$ is the quantity
+	\begin{equation*}
+	    \prob(A \ \vert \ B) = \frac{\prob(A \cap  B)}{\prob(B)}.
+	\end{equation*}
+	\begin{itemize}
+	    \item[\textsf{NAP1}.] for every $A \subseteq \Omega,$ $\prob(A) \geq 0$,
+	    \item[\textsf{NAP2}.] for every $A \subseteq \Omega,$ $\prob(A) = 1 \iff A = \Omega$,
+	    \item[\textsf{NAP3}.] for every disjoint $A, B \subseteq \Omega$, $\prob(A \cup B) = \prob(A) + \prob(B)$,
+	    \item[\textsf{NAP4a}.] for every $X \in \finset{\Omega} \sm \{\emptyset\}$, $\prob(A \ \vert \ X) \in \RR$,
+	    \item[\textsf{NAP4b}.] there exists an algebra homomorphism
+	    \begin{equation*}
+	        \mathfrak{j}: \cl{F}(\finset{\Omega}, \RR) \to \cl{R}
+	    \end{equation*}
+	    such that $\prob(A) = \mathfrak{j}(\prob(A \ \vert \ \cdot \ ))$ for any $A \subseteq \Omega$.
+	\end{itemize}
+    In the context of classical probability, the axiom $\mathsf{K_{\infty}}$ is equivalent to the \emph{Conditional Probability Principle}, that is, the statement 
+    \begin{cpp}
+    If $\cl{A}_n$ is an increasing family of events such that $\bigcup_{n \in \NN} \cl{A}_n = \Omega,$ then there exists an $N > 0$ such that for every $n \geq N$, $\prob(\cl{A}_n) > 0$ and for every event $A$, $\prob(A) = \lim_{n \to +\infty} \prob(A \ \vert \ \cl{A}_n)$.
+    \end{cpp}
+    The axioms \textsf{NAP4a} and \textsf{NAP4b} are a direct reformulation of the Conditional Probability Principle in a non-Archimedean setting.
+    \subsection{From $\Lambda$-limits to NAP spaces}
+    fix a $\finset{\Omega}-$completion $\completion$ of the reals built over a fine non-principal ultrafilter $\cl{U}$. As shown in the previous chapter, we could use $\ns{\RR}$ to denote the hyperreal field inside $\completion$. $\ns{\RR}$ will be the superreal field required in our axioms. As of \textsf{NAP4b}, we need an algebra homomorphism into $\ns{\RR}$ that assigns an hyperreal number to every function $f: \finset{\Omega} \to \RR$ --- a natural possibility is the following:
+	\begin{equation*}
+	    \mathfrak{j}(f) = \lambdalim{(\lambda, f(\lambda))}.
+	\end{equation*}
+	To provide a model of NAP space, though, it isn't enough to provide this homomorphism; we will need to define, at least on finite subsets of $\Omega$, a probability function. To do so, we start by deciding the desired probability of singletons:
+	\begin{equation*}
+	    \forall \omega \in \Omega, \ \prob(\{\omega\}) := p(\omega) \in \struct{K}.
+	\end{equation*}
+	We now fix an arbitrary point $\omega_{0} \in \Omega$ and define a \emph{weight function}
+	\begin{equation*}
+	    \forall \omega \in \Omega, \ w(\omega) = \frac{p(\omega)}{p(\omega_{0})}.
+	\end{equation*}
+    We are now ready to define the conditional probability over finite events,
+    \begin{equation*}
+        \prob(A \ \vert \ \lambda) = \frac{\sum\limits_{\omega \in A \cap \lambda} w(\omega)}{\sum\limits_{\omega \in \lambda} w(\omega)},
+    \end{equation*}
+    and then saying that
+    \begin{equation}
+    \label{eq:prob}
+        \prob(A) = \lambdalim{(\lambda, \prob(A \ \vert \ \lambda))}.
+  \end{equation}
+    The latter equation could be rewritten by first agreeing on a definition of \emph{infinite sum} through $\Lambda-$limits. If we take a function $u: A \to \RR$, and set that
+    \begin{equation*}
+        \sigma_{u}(\lambda) = \sum\limits_{x \in A \cap \lambda} u(x),
+    \end{equation*}
+    then we can define the infinite sum as follows:
+    \begin{equation*}
+        \sum\limits_{x \in A} u(x) = \lambdalim{(\lambda, \sigma_{u}(\lambda))}.
+    \end{equation*}
+    First, we observe that $\Lambda-$limits commute with algebraic operations, division included. So the definition of probability, as defined in equation (\ref{eq:prob}), can be rewritten as
+    \begin{equation}
+    \label{eq:prob2}
+        \prob(A) = \frac{\sum\limits_{x \in A} w(x)}{\sum\limits_{x \in \Omega} w(x)}.
+    \end{equation}
+    \begin{lemma}
+    The following equality holds:
+    \begin{equation*}
+        p(\omega_{0}) = \sum\limits_{\omega \in \Omega} w(\omega).
+    \end{equation*}
+    \end{lemma}
+    \begin{proof}
+        First, observe that $w(\omega_{0}) = 1$. Then, by definition
+        \begin{equation*}
+            p(\omega_{0}) = \prob(\{\omega_{0}\}) = \lambdalim{(\lambda, \prob(\{\omega_{0}\} \ \vert \ \lambda))}.
+        \end{equation*}
+        We have that
+        \begin{equation*}
+            \prob(\{\omega_{0}\} \vert \lambda) = \frac{w(\omega_{0}) \chi_{\lambda}(\omega_{0}))}{\sum\limits_{\omega \in \lambda}w(\omega)},
+        \end{equation*}
+        where $\chi_{\lambda}$ is the characteristic function of $\lambda$. By applying the $\Lambda-$limits,
+        \begin{equation}
+        \label{eq:3}
+            p(\omega_{0}) = \frac{\lambdalim{(\lambda, \chi_{\lambda}(\omega_{0})}}{\sum\limits_{\omega \in \Omega}w(\omega)}.
+        \end{equation}
+        We now show that $\lambdalim{(\lambda, \chi_{\lambda}(\omega_{0})}$ has only two possible values: 0 or 1. If we observe that, for any $\omega \in \Omega$, the two following equations hold
+        \begin{align*}
+            \chi_{\lambda}(\omega)[1-\chi_{\lambda}(\omega)] =& 0, \\
+            \chi_{\lambda}(\omega) + [1-\chi_{\lambda}(\omega)] = & 1,
+        \end{align*}
+        so by applying $\Lambda-$limits to both equations,
+        \begin{align*}
+            \lambdalim{(\lambda, \chi_{\lambda}(\omega))}[1-
+            \lambdalim{(\lambda, \chi_{\lambda}(\omega))}] =& 0, \\
+            \lambdalim{(\lambda, \chi_{\lambda}(\omega))}+[1-
+            \lambdalim{(\lambda, \chi_{\lambda}(\omega))}] =& 1,
+        \end{align*}
+        so the only possible values for $
+            \lambdalim{(\lambda, \chi_{\lambda}(\omega)}$ are 0 or 1.
+        \par Furthermore, we have that $\prob(B) = 0 \iff B = \emptyset$ (essentially as a consequence of \textsf{NAP2} and \textsf{NAP3}), so $p(\omega_{0}) > 0$ and thus $\lambdalim{(\lambda, \chi_{\lambda}(\omega_{0}))} > 0$ --- this means that $\lambdalim{(\lambda, \chi_{\lambda}(\omega_{0}))} = 1$. Back to (\ref{eq:3}),
+        \begin{equation*}
+            p(\omega_{0}) = \frac{1}{\sum\limits_{\omega \in \Omega} w(\omega)},
+        \end{equation*}
+        which is the thesis.
+    \end{proof}
+    This allows to further simplify (\ref{eq:prob2}), 
+    \begin{equation}
+    \label{eq:prob3}
+    \prob(A) = \frac{1}{p(\omega_{0})} \sum\limits_{\omega \in A} w(\omega).
+    \end{equation}
+    Since, as we have shown, what is really necessary in building a NAP space through $\Lambda-$limits is assigning a weight function, $w: \Omega \to \RR^{+}.$ We will say that this weight function \emph{generates} the NAP space.
+    \subsection{A fair lottery on the naturals: a positive result}
+    As shown in (\ref{subs:ideals}), building an $\cl{I}$-completion from an ultrafilter is perfectly equivalent to building one from a maximal ideal of the algebra of functions. In this example, we will do precisely so.
+    \par First, we fix $\Omega = \NN$ and let
+    \begin{equation*}
+        \lambda_{[n]} = \{1, 2, ... n\} \subseteq \NN,
+    \end{equation*}
+    and denote by $\Lambda = \{\lambda_{[n]}: n \in \NN\} \subseteq \finset{\NN}$. If we let
+    \begin{equation*}
+        I_{\Lambda} = \{f: \finset{\NN} \to \RR \ \vert \ \forall x \in \Lambda, \ f(x) = 0\} \subseteq \cl{F}(\finset{\NN}, \RR),
+    \end{equation*}
+    then $I_{\Lambda}$ is a proper ideal and thus, by the Prime Ideal Theorem, can be extended to a maximal ideal $\wt{I_{\Lambda}}$. Let $\cl{U}$ denote the ultrafilter over $\finset{\NN}$ obtained from $\wt{I_{\Lambda}}$, and let $\completion$ be the $\finset{\NN}$-completion of the reals obtained in the manner described in the proof of (\ref{thm:existenceofcompl}). In this case, for every $f: \finset{\NN} \to \RR$ we set
+    \begin{equation*}
+        \fk{j}(f) = \lambdalim{(\lambda, \ f(\lambda))} = [f].
+    \end{equation*}
+    Let $\fk{c}(\lambda) = \vert \lambda \vert$, and let $\alpha = \lambdalim{(\lambda, \ \fk{c}(\lambda))}$.
+    \begin{lemma}
+    $\alpha$ is an infinite number.
+    \end{lemma}
+    \begin{proof}
+    For any natural number $N > 0$,
+    \begin{equation*}
+        \{\lambda \in \finset{\NN}: \vert \lambda \vert > N\} \supseteq \Lambda \cap (\finset{\NN} \sm \{\lambda \in \finset{\NN}: \max{\lambda} \leq N\}),
+    \end{equation*}
+    where the former set belongs to $\cl{U}$ since $\{\lambda \in \finset{\NN}: \max{\lambda} \leq N\}$ is finite and $\cl{U}$ is non-principal. This implies that $\{\lambda \in \finset{\NN}: \vert\lambda\vert > N\} \in \cl{U}$, and thus that $\alpha > N$ for every $N \in \NN$.
+    \end{proof}
+    Denote by $\epsilon = \alpha^{-1}$, which is then an infinitesimal number. If we let $\prob(\{n\}) = \epsilon$ for every $n \in \NN$, then we both satisfy the intuition that the probability of the winning ticket must be positive, yet infinitesimal, and also
+    \begin{equation*}
+        \prob(\NN) = \frac{1}{\alpha} \sum\limits_{m \in \NN} w(m) = \frac{1}{\alpha} \lambdalim{(\lambda, \ \sum\limits_{m \in \lambda} w(m))} = \frac{1}{\alpha} \lambdalim{(\lambda, \ \fk{c}(\lambda))} = 1,
+    \end{equation*}
+    since $w \equiv 1$.
+\end{document}

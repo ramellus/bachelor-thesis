@@ -1,0 +1,152 @@
+\documentclass[draft.tex]{subfiles}
+\begin{document}
+\epigraph{ “The trouble with having an open mind, of course, is that people will insist on coming along and trying to put things in it.” }{Terry Pratchett}
+The need for a formal theory of infinitesimals dates back to George Berkeley's famous comment on the foundations of calculus: «\textit{And what are these same evanescent increments? They are neither finite quantities, nor quantities infinitely small, nor yet nothing. May we not call them the {\upshape ghosts of departed quantities}?}». This harsh critique did not stop Euler, amongst others, from developing a huge body of literature on calculus and infinitesimals, and it wasn't until Weierstrass' theory of $\varepsilon-\delta$s that Berkeley's ghost --- pun not intended --- was put to rest. Still, the formal development of calculus wasn't enough; something had to be done for the infinitesimals, and more than two hundred years after Leibniz and Newton's time the first true hit to the \textit{evanescent} nature of infinitesimals was blown. In a series of spectacular papers, Abraham Robinson built a sound and indisputable base for a theory of infinitesimal and infinite numbers: the sixties marked the birth of \emph{Nonstandard Analysis}.
+\par
+Robinson's work relied heavily on a logical formalism, and was thus quite indigestible for the \textit{working mathematicians} (who, rephrasing a famous quote of Feynman's, are interested in mathematical logic just as much as birds are interested in ornithology). Considerable work has been done since the sixties in order to make Nonstandard Analysis more mathematician-friendly: what follows is a sightseeing tour through the vast land of Nonstandard Analysis or, more precisely, of \textit{nonstandard methods}: while the original purpose of Robinson's --- giving a sound status to Leibniz and Newton's legacy --- is indeed important for historical and philosophical reasons, the methods and tools developed studying Nonstandard Analysis have ever since spread throughout mathematics (for an example of the use of nonstandard methods in other branches of mathematics, see \cite{dinasso}). We will start with trying to understand more precisely what nonstandard methods \textit{are}; we will then give a few examples of possible frameworks for nonstandard methods: a very \textit{elementary} one, albeit powerful enough to develop basic calculus; a more concrete one, through the use of ultrapowers; and a sneaky peek into the theory of superstructures. 
+%%%%%
+\section{A farewell to standardness}
+Following \cite{eightfold}, we will say that nonstandard methods are made up by three main tools: a \emph{star map}, a \emph{transfer principle} and \emph{saturation}. We begin with a universe $\struct{U}$, which will usually (for an example of exceptions, consider the section right after this one) be a set large enough to contain all the \textit{important} objects we need to perform mathematics: $\NN, \ \ZZ, \ \QQ,$ $\ \RR, \ \CC,$ functions between these sets, subsets of these sets, families of subsets of these sets (for example, topologies) and so on. We will refer to $\struct{U}$ as the \emph{standard universe}. We wish to enlarge $\struct{U}$ into a bigger universe $\struct{V},$ which will contain \emph{nonstandard} counterparts of the elements of $\struct{U}$ (for example, $\ns{\RR}$). Here enters the first tool of nonstandard methods: we call \emph{star map} the function $\ast: \struct{U} \to \struct{V}$ that sends every element $x$ of the standard universe into its nonstandard counterpart $\ns{x}$. We ask that natural numbers are sent into natural numbers (i.e., that $\ns{n} = n$) and that $\NN \subset \ns{\NN}$ (\emph{properness}). We call \emph{internal} the objects that are images of standard objects; we call \emph{external} everything else. Our star map needs to obey an important law, the \emph{transfer principle}: we ask that for any property $p(x_1, ... x_n)$, $p(x_1, ... x_n)$ is true in $\struct{U}$ if and only if $p(\ns{x_1}, ... \ns{x_n})$ is true in $\struct{V}$. This is, arguably, the central point of Nonstandard Analysis: the tool that lets us \textit{transfer} properties of standard objects onto their nonstandard counterparts. For example, we could talk about \textit{hyperfinite} sets, which are the nonstandard counterparts of finite sets: they aren't finite, but enjoy many properties of finite sets. A final word about \emph{saturation}: this property is essential in proving more advanced results, for example in functional analysis or measure theory, but its nature is beyond the scope of this thesis.
+%%%%%%
+\section{Elementary, my dear Robinson}
+Model theory lends us a notion that, albeit remarkably more contained than the more general setting introduced in the previous paragraph, will give us an abstract example of nonstandard methods.
+\begin{definition}
+Let $L$ be a first-order signature, $M, N$ be $L-$structures and $L(N)$ be the set of first-order sentences with parameters in $N$. We say that $M$ is an \emph{elementary extension} of $N$, and write $N \preceq M$, if $N \subseteq M$ and for every $\phi \in L(N)$,
+\begin{equation*}
+    N \vDash \phi \iff M \vDash \phi.
+\end{equation*}
+\end{definition}
+\label{def:elext}
+One may imagine an elementary extension of a ''universe'' $N$ as a bigger universe containing $N$ where the old inhabitants maintain the same properties, while possibly gaining new ones (and meeting new inhabitants as well).
+\begin{definition}
+\label{def:hyperreal}
+Let $\RR$ be the structure of the real numbers in the language of ordered rings. Consider an elementary extension $\ns{\RR}$: we call it the \emph{hyperreal field}.
+\end{definition}
+\begin{lemma}
+\label{lem:field}
+$\ns{\RR}$ is a field.
+\end{lemma}
+\begin{proof}
+All the properties of addition and multiplication can be written down in first order sentences, which are then true in the new structure.
+\end{proof}
+We now consider $\RR$ to be our standard universe, the identity map on $\RR$ to be the star map and $\ns{\RR}$ to be the nonstandard universe where nonstandard methods are performed. While being extremely far from concrete, this setting allows us to prove basic theorems such as:
+\begin{theorem}
+\label{thm:exinf}
+$\ns{\RR}$ contains infinitesimals and infinite elements.
+\end{theorem}
+\begin{proof}
+We are going to show the existence of an infinitesimal number $\varepsilon$: after doing so, $\varepsilon^{-1}$ is going to be an infinite number. Suppose $d \in \ns{\RR} \sm \RR$ is neither infinite nor infinitesimal and consider \{$y \in \RR: y < d$\} $\subseteq \RR$. Being a upper-bounded non-empty subset of $\RR,$ completeness grants the existence of a supremum $k = \sup\{y \in \RR: y < d\}$. If $d-k > 0,$ then call $\varepsilon = d-k$ and suppose $\varepsilon = d-k > c$ for some standard positive real $c$; then in particular $c+k < d,$ meaning $k < k+c < d,$ against the definition of (least) upper-bound; if, on the other hand, $k-d > 0,$ then call $\varepsilon = k-d$ and suppose $\varepsilon > c$ for some standard positive real $c$: this means $d < k-c$, so $k-c < k$ is still an upper-bound, against the definition of supremum.  
+\end{proof}
+We will now introduce a few notions that will be the same throughout the thesis, modulo appropriate corrections.
+\begin{definition}
+\label{def:infclose}
+Let $a, b \in \ns{\RR}$. We say that $a$ and $b$ are \emph{infinitesimally close} if $\vert a - b \vert$ is infinitesimal. We denote this by $a \sim b$.
+\end{definition}
+One could verify that $\sim$ is an equivalence relationship. Note that it is not definable in the structure and thus neither are definable the following sets:
+\begin{definition}
+\label{def:monad}
+Let $x \in \ns{\RR}$. We call \emph{monad of $x$} the set $\mu(x) = \{y \in \ns{\RR}: y \sim x\}$. 
+\end{definition}
+As an example of the nonstandard methods that can be done in this setting, we prove one of the basic results about continuity, which formally embodies our intuition about ''close'' points staying ''close'' after the action of a continuous function: let us extend the language by adding a symbol for a function $f: \RR \to \RR$, and denote by $\ns{f}$ its interpretation in $\ns{\RR}$.
+\begin{theorem}
+\label{thm:continuity}
+Let $f: \RR \to \RR$. Let $\ns{f}$ denote its interpretation in $\ns{\RR}$. Then $f$ is continuous at $b \in \RR$ if and only if for every $x \in \mu(b)$, $\ns{f}(x) \in \mu(\ns{f}(b))$.
+\end{theorem}
+\begin{remark}
+The fact that this characterization of continuity sounds very much like the topological definition through the use of open sets is not a coincidence. Indeed, one could show that a set $A \subseteq \RR$ is open iff for every standard $x \in \ns{A}$ we have that $\mu(x) \subseteq \ns{A}.$ Monads provide thus an alternative way of looking at \textit{nearness}.
+\end{remark}
+\begin{proof}
+Let $f$ be continuous at $b$, and let $x \in \mu(b):$ then $\vert x - b \vert$ is infinitesimal. We translate the definition of continuity into a first order formula that holds in $\RR:$
+\begin{equation*}
+    \forall \epsilon > 0 \exists \delta > 0(\forall y \in \RR(\vert x - b \vert < \delta \then \vert f(x) - f(b) \vert < \epsilon)).
+\end{equation*}
+A few remarks are due: some shorthands are in use, so $(\forall x > 0)\phi$ truly means $\forall x(x > 0 \then \phi)$, and the same goes for $(\forall x \in \RR)\phi$ that, remembering that our language contains a predicate $\RR(x)$, translates as $\forall x(\RR(x) \then \phi).$ A similar shorthand is in use for $\exists$ (where $\meet$ substitutes $\then$). Finally, the absolute value function $\vert \cdot \vert$ can be defined in our language, so we use its symbol freely. Let $\overline{\epsilon} > 0$ be a real positive number, and let $\overline{\delta} > 0$ be the positive number obtained from the truth of the sentence. By transfer, the following sentence is true in $\ns{\RR}:$
+\begin{equation*}
+    \forall y \in \ns{\RR}(\vert x - b \vert < \overline{\delta} \then \vert \ns{f}(x) - \ns{f}(b) \vert < \overline{\epsilon}).
+\end{equation*}
+Now let $x \in \mu(b)$: clearly, $\vert x - b \vert < \overline{\delta},$ since $\overline{\delta}$ is a positive real number, so $\vert \ns{f}(x) - \ns{f}(b) \vert < \overline{\epsilon}$. Since $\vert \ns{f}(x) - \ns{f}(b) \vert$ is smaller than any positive real number, it is infinitesimal and thus $\ns{f}(x) \in \mu(\ns{f}(b)).$
+\par Viceversa, suppose $f$ is not continuous at $b$: then the following sentence is true in $\RR:$
+\begin{equation*}
+    \exists \epsilon > 0(\forall \delta > 0(\exists y \in \RR(\vert y - b \vert < \delta \meet \vert f(y) - f(b) \vert \geq \epsilon)).
+\end{equation*}
+Let's fix a standard real number $\overline{\epsilon}$ as a witness for the existential quantifier; then by transfer in $\ns{\RR}$ it is true that
+\begin{equation*}
+    \forall \delta > 0(\exists y \in \ns{\RR}(\vert y - b \vert < \delta \meet \vert f(y) - f(b) \vert \geq  \overline{\epsilon}).
+\end{equation*}
+This is in particular true for an infinitesimal $\delta$, leading to a contradiction.
+\end{proof}
+While this is powerful, it is also unsatisfactory. We don't have a real grasp of what these infinitesimals are: we only know they are there. A more concrete example of this type of setting for nonstandard methods will be provided in the next paragraph.
+\section{The merry ultrapowers of $\RR$}
+The central notion is that of an ultrafilter: one might think of it as a way of deciding which sets are \textit{large} and which are \textit{small} (indeed, one could think of ultrafilters as $\{0,1\}$-valued finitely additive measures on $\cl{P}(X)$). This choice nonetheless needs to be rationally sound, so the intersection of large sets must be large (as if there wasn't enough space for two large sets to exists ''indipendently''), any superset of a large set must be large and if a set is large, then its complement is small (and viceversa). This motivates the following definition:
+\begin{definition}
+\label{def:ultrafilter}
+Let $I$ be a set. An \emph{ultrafilter over $I$} is a family $\cl{U}$ of subsets of $I$ closed under intersection (for all $A, B \in \cl{U}$, $A \cap B \in \cl{U}$), upwards (for all $A \in \cl{U}, B \subseteq I$, if $A \subseteq B$ then $B \in \cl{U}$) and, most importantly, that has the \emph{ultra} property, i.e. for all $A \subseteq I$, either $A \in \cl{U}$ or $A^{c} \in \cl{U}$.
+\end{definition}
+Ultrafilters come in two different flavours: there are \emph{principal} ultrafilters, that is ultrafilters of the form $\{A \subseteq I: x \in A\}$ for some $x \in I$, and \emph{nonprincipal} ultrafilters. For reasons that will become clearer later on, we will focus ourselves on nonprincipal ultrafilters (oftentimes also called \emph{free}). Beforehand, though, it would be necessary to prove the existence of such ultrafilters. This is a classical result, whose proof can be found in any introductory set theory book (for example, see \cite{schimmerling}).
+\begin{theorem}
+\label{thm:nonprincipal-ultrafilters}
+Let $I$ be an infinite non-empty set, then there is an ultrafilter $\cl{U}$ over $I$ that contains every cofinite subset of $I$; in particular, it is nonprincipal.
+\end{theorem}
+We now begin with the set of real-valued sequences; we denote it by $\RR^{\omega}$. It can be naturally embodied with a ring structure, which will later on be useful. As of (\ref{thm:nonprincipal-ultrafilters}), there exists a nonprincipal ultrafilter over $\NN$: let us call it $\cl{U}$. We define an equivalence relationship on $\RR^{\omega}$, saying that two sequences are the same (and denoting it by $r \equiv s$) if the set of natural numbers over which they coincide is \textit{large}, i.e. it belongs to the ultrafilter. Using a suggestive logical notation, we define
+\begin{equation*}
+    \llbracket r = s \rrbracket := \{n \in \NN: r(n) = s(n)\}.
+\end{equation*}
+We now say that $r \equiv s$ if and only if $\llbracket r = s \rrbracket \in \cl{U}$. We are now ready to build our concrete example of nonstandard universe:
+\begin{definition}
+\label{def:ultrapower}
+The \emph{ultrapower of $\RR$ by $\cl{U}$}, denoted $\RR_{\cl{U}}$, is the quotient set $\quot{\RR^{\omega}}{{\equiv}}.$ 
+\end{definition}
+We extend addition and multiplication from $\RR^{\omega}$ to $\RR_{\cl{U}}$ naturally, i.e. $[r]+[s] = [r+s]$ and $[r]\cdot[s] = [r \cdot s]$.
+\begin{remark}
+The choice of a nonprincipal ultrafilter is instrumental in getting a \emph{proper} ultrapower of $\RR$. In fact, suppose we had built our ultrapower from a principal ultrafilter, say (without loss of generality) the set of subsets of $\NN$ that contain $1$. Let $r \in \RR^{\omega}$ such that $r(1) = c \in \RR$, and denote by $\mathbf{c}$ the constant sequence in $c$; then $r \equiv \mathbf{c}$. Every equivalence class would be, then, the equivalence class of a constant sequence, and the ultrapower would be isomorphic to the real numbers. Nothing new would be gained.
+\end{remark}
+We identify every real number $a \in \RR$ with the equivalence class of the constant sequence $[\mathbf{a}]$. This means that $\RR \subset \RR_{\cl{U}}$; not only that, but it can be shown that $\RR_{\cl{U}}$ is a field of which $\RR$ is a subfield. The natural ordering on real numbers can be extended as well:
+\begin{definition}
+Let $[r], [s] \in \RR_{\cl{U}}$. We say that $[r] \leq [s]$ if and only if $\llbracket r \leq s \rrbracket := \{n \in \NN: r(n) \leq s(n)\}$ is large, i.e. is a member of $\cl{U}$. This extends the ordering because for any $a \leq b$ real numbers, $\llbracket \mathbf{a} \leq \mathbf{b} \rrbracket = \NN \in \cl{U}$.
+\end{definition}
+We now give an example of an infinitesimal number; this leads to the intuition that infinitesimals are the equivalence classes of sequences that converge to zero, while infinite numbers are the equivalence classes of divergent sequences.
+\begin{example}
+Let $r(n) = \frac{1}{n}$. Then $\varepsilon := [r]$ is an infinitesimal: for any natural number $N$, we have that
+\begin{equation*}
+    \llbracket r \leq \frac{1}{N} \rrbracket = \{n \in \NN: n \geq N\} \in \cl{U},
+\end{equation*}
+since $\cl{U}$ contains every cofinite subset of $\NN$.
+\end{example}
+We take the quotient projection as a star map, and the following fundamental theorem provides as a special case the transfer principle:
+\begin{theorem}[Łoś]
+Let $\cl{U}$ be a nonprincipal ultrafilter over $\NN$, and $\phi(x_1, ... x_n)$ a first-order formula with free variables ranging amongst $x_1, ... x_n$. Then
+\begin{equation*}
+    \RR_{\cl{U}} \vDash \phi([a_1], ... [a_k]) \iff \llbracket \phi(a_1, ... a_k) \rrbracket := \{n \in \NN: \RR \vDash \phi(a_1(n), ... a_k(n))\} \in \cl{U}.
+\end{equation*}
+In the special case where $\phi$ is true of certain real numbers $r_1, ... r_k$, then $\llbracket \phi(\mathbf{r_1},...\mathbf{r_k}) \rrbracket = \NN \in \cl{U}$.
+\end{theorem}
+\begin{remark}
+One could wonder whether the choice of $\cl{U}$ has any influence on the structure of the ultrapower $\RR_{\cl{U}}$. The answer is, as it often is in mathematics, \textit{it depends}. Assuming the Continuum Hypothesis, all ultrapowers are isomorphic regardless of the choice of the ultrafilter; for further details, see \cite{mse}.
+\end{remark}
+\section{Refrain: superstructures (I)}
+While the ultrapower construction is indeed more concrete and intelligible, it is still somewhat unsatisfactory. What about topology? What about measure theory? Are we really stuck with real analysis forever? \textit{Deo gratias,} no. More can be said and done using nonstandard methods; in order to do so, however, a bigger theory must be developed. We will barely scratch the surface of it: for a deeper analysis of the following objects, see the second chapter of \cite{introductionloeb}.
+\begin{definition}
+Let $X$ be an infinite, non-empty set. We define recursively:
+\begin{align*}
+    V_0(X) &= X, \\
+    V_n(X) &= \powerset{V_{n-1}(X)} \cup V_{n-1}(X).
+\end{align*}
+The \emph{superstructure over $X$} is the set
+\begin{equation*}
+    V_{\omega}(X) = \bigcup\limits_{n \in \NN} V_n(X).
+\end{equation*}
+We call $X$ a set of \emph{individuals}.
+\end{definition}
+Superstructures allow us to formalize the otherwise vague notion of ''universe'' used when describing nonstandard methods. The superstructure over a set contains every mathematical object that can be built from the set using set-theoretic operations; for example, if we set $X = \RR$ then the resulting superstructure $V_{\omega}(\RR)$ contains real numbers, subsets of real numbers, real-valued functions of real variable, but also complex numbers, subsets of the complex field, topologies on the complex plane, projective spaces, Banach spaces, measure spaces and so on: almost everything that might come to the mind of a mathematician can be found at a certain step of this hierarchy of sets, and thus belongs to the superstructure. This makes the superstructure the ideal home for performing mathematics, and it provides an excellent framework for nonstandard methods. Following the approach in the second chapter of \cite{introductionloeb}, we consider a first-order signature $\cl{L}_X = \{\in, =\}\cup\{a: a \in V_{\omega}(X)\}$; from now onwards, we will adopt the usual model-theoretic abuse of identifying the language with the set of its sentences, which will be then called $\cl{L}_X$. We now consider two sets of individuals $X, Y$ both containing $\NN$. Their respective superstructures, $V_{\omega}(X)$ and $V_{\omega}(Y),$ can be seen as structures respectively in $\cl{L}_X$ and $\cl{L}_Y$. Thus, a truth relation is well-defined. We are now ready to define what a \emph{monomorphism} between superstructures is:
+\begin{definition}
+An injective function $\ast: V_{\omega}(X) \to V_{\omega}(Y)$ is called a \emph{monomorphism} if
+\begin{itemize}
+    \item[I.] $\ns{\emptyset} = \emptyset,$
+    \item[II.] if $a \in X,$ then $\ns{A} \in Y,$ and for every $n \in \NN,$ $\ns{n} = n,$ 
+    \item[III.] if $a \in V_{n+1}(X) \sm V_{n}(X),$ then $\ns{A} \in V_{n+1}(Y) \sm V_{n}(Y),$
+    \item[IV.] if $a \in \ns{V_{n}(X)}$, and $b \in a,$ then $b \in \ns{V_{n-1}(X)},$
+    \item[V.] for all $\varphi \in \cl{L}_X,$ let $\ns{\varphi} \in \cl{L}_Y$ be the sentence obtained by replacing each constant in $\varphi$ with its image under $\ast$: then $V_{\omega}(X) \vDash \varphi$ iff $V_{\omega}(Y) \vDash \ns{\varphi}.$
+\end{itemize}
+\end{definition}
+Property [V] is precisely the transfer principle, so a triple $\langle V_{\omega}(X), V_{\omega}(Y), \ast \rangle$ is the perfect framework for nonstandard methods. This triple will usually be called a \emph{nonstandard universe}. Depending on the source, the monomorphism might also be called a superstructure embedding (for example in \cite{keisler}). The existence of a nonstandard universe is guaranteed by the possibility of extending the ultrapower construction to superstructures, but the details are once again beyond the scope of this thesis.
+\end{document}
